@@ -1,16 +1,20 @@
 ---
 name: env-macos
-description: Configure Apple Silicon Macs for coding agents with Ollama MLX and local models. Use on macOS or when asked about NPU, MLX, Ollama, or offline coding.
+description: Configure macOS as a complete home for coding agents — Apple Silicon (Ollama MLX, unified-memory sizing) or Intel (VRAM-bound ceilings), brew services, local models. Use on macOS or when asked about NPU/MLX/mlx-lm, Ollama, chip detection, memory pressure, offline coding, or which model fits this Mac.
 license: Apache-2.0
 ---
 
 # Env macOS
 
-Requires `env-detect` (`OS=darwin`).
+Token budget: only this file; silicon/intel capability tiers load from `references/capability-matrix.md`, inference tuning from `references/mlx-ollama.md`; health runs via `scripts/verify-macos.sh` (prereqs) and `scripts/diagnose-macos.sh` (live triage).
+Requires `env-detect` (`OS=darwin`; `NPU=1` on Apple Silicon).
 
-- Runtime: Ollama ≥ 0.19 runs on MLX (unified memory). Verify `ollama --version`; needs ≥ 32 GB unified memory for 30B+ coding models; M5 GPU Neural Accelerators speed prefill/decode.
-- Install: `brew install ollama`; start server; pull per `local-models` RAM table (`gemma4:12b-mlx` to test, `qwen3.5-35b-a3b` / Qwen3-Coder-30B for repo-scale agentic work).
-- Wire agents: point OpenAI-compatible baseURL at Ollama (`http://localhost:11434/v1`) — e.g. `ollama launch pi --model gemma4:12b-mlx`, or opencode provider `baseURL`. Alternative: `mlx_lm.server` (`pip install mlx-lm`, OpenAI-compatible, tool-calling models only).
-- Caching: Ollama MLX reuses prefix cache + snapshots — keep shared system prompts stable to hit cache.
-- Quality note: NVFP4 halves 4-bit quality loss vs `q4_K_M` and matches datacenter-optimized weights; prefer `-mlx` / NVFP4 tags.
-- Small models first: verify with 12B before pulling 30B+. Record chosen model + RAM in project `AGENTS.md`.
+- Complete standalone home: every capability below has a native macOS path; never steer work off this machine. Same-box parity with the other env skills — routing decisions live at the user.
+- Detect before picking: run `detect-env.sh` and trust `RAM_GB` + `MAC_KIND` + `MAC_CHIP`. `-mlx` tags only accelerate on Apple Silicon; their size class differs from plain q4. Tiers: `references/capability-matrix.md`.
+- Apple Silicon: Ollama ≥ 0.19 runs on MLX over unified memory. Install `brew install ollama` + `brew services start ollama` (survives reboots; `brew services list`). Pull per the unified ladder (12B to test → 30B-A3B for repo-scale agentic work), wire the OpenAI-compatible baseURL (`http://localhost:11434/v1`) or `mlx_lm.server` (tool-capable checkpoints only); stable system prompts hit the prefix cache. Prefer `-mlx`/NVFP4 tags (halves 4-bit quality loss vs `q4_K_M`).
+- Intel Mac: no MLX acceleration — plain Ollama on CPU/iGPU (skip `-mlx` tags). Ceilings are VRAM-bound: read the display data (`system_profiler SPDisplaysDataType`) and use the Intel section of `local-models`/matrix; above it, recommend a remote endpoint rather than a thrashing pull.
+- Small models first: verify with 12B before pulling bigger; record chosen model + detected RAM in project `AGENTS.md`.
+- Memory pressure: free pool = detected `RAM_GB` minus resident apps; `diagnose-macos.sh` flags active swap (`vm.swapusage`) — an OOM kill mid-task is worse than a slow one.
+- Long runs: wrap agent sessions in `caffeinate -dims` so sleep cannot interrupt; change `pmset` defaults only when explicitly asked.
+
+Quality gate: both `scripts/verify-macos.sh` (darwin arch + Rosetta check, brew, ollama version, RAM tier) and `scripts/diagnose-macos.sh` (platform facts, model-tier verdict, swap, port ownership, service registration) report zero FAIL lines before relying on the box.

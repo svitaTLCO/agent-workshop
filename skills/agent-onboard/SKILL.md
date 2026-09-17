@@ -8,6 +8,8 @@ license: Apache-2.0
 
 Prime directive: every machine you configure must produce higher-quality output at lower token cost. Apply `quality-gates` to your own work and `context-diet` to every file you write. Idempotent: safe to re-run. Missing API keys never block installation.
 
+Token budget: this checklist only; per-module skill files load during their step, never bulk.
+
 Trigger phrases (EN/中文): `init my agent`, `set up`, `bootstrap`, `configure my environment`, `what's missing`, `refresh my skills`, `开箱`, `初始化`, `配置 agent`, `补全环境`.
 
 ## Step 1 — Audit current state
@@ -25,7 +27,7 @@ Map what you found to the `npx skills` agent table (see `docs/compatibility.md`)
 
 ## Step 3 — Diff against catalog
 
-Compare with `skills/*/SKILL.md` in this repo. List installed / missing / outdated. Recommend by profile (`docs/profiles.md`): ask user to pick `minimal`, `power`, `mac-npu`, `windows-wsl`, or `airgapped` — default to auto-detected OS.
+Compare with `skills/*/SKILL.md` in this repo. List installed / missing / outdated. Recommend by profile (`docs/profiles.md`): ask user to pick `minimal`, `power`, `mac-npu`, `windows-native`, `windows-wsl`, or `airgapped` — default to auto-detected OS.
 
 ## Step 4 — Ask (max 5 questions)
 
@@ -55,3 +57,5 @@ Generate from `templates/AGENTS.md` + selected modules. Write root `AGENTS.md` (
 ## Step 8 — Report
 
 Installed / skipped (with reason) / keys deferred / token impact (skills added, AGENTS.md line count, `rtk` savings where measured) / verification output / next step (`refresh my skills` to re-run). Never claim success on failed checks — apply `quality-gates` ladder to this report itself.
+
+Quality gate: every Step-7 check passes — `validate-skills.py` green, new skills listed, trigger test summarizes correctly; the report quotes those outputs verbatim.

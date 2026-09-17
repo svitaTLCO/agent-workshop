@@ -25,6 +25,10 @@ for f in skills:
     body = text.split('---', 2)[2]
     if len(body.strip().splitlines()) > 500:
         errors.append(f'{name}: body > 500 lines')
+    if 'Token budget' not in body:
+        errors.append(f'{name}: missing "Token budget" statement')
+    if 'Quality gate' not in body:
+        errors.append(f'{name}: missing "Quality gate" statement')
 for s in skills:
     print(f'ok {s.parent.name}')
 if errors:

@@ -18,3 +18,7 @@ Requirements (agentskills.io spec + opencode discovery):
 - Install test: `npx skills add ./ -s <name> --dry-run` or `./scripts/install.sh --project --skills <name>`.
 
 See `template/` and `references/checklist.md`.
+
+Token budget: this file + the template copy; `references/checklist.md` loads only at review time.
+
+Quality gate: `python3 scripts/validate-skills.py` passes on the new skill and the install test runs clean (`--dry-run` first).

@@ -1,6 +1,6 @@
 ---
 name: local-models
-description: Pick and wire a local coding model by RAM and task. Use when asked about offline models, Ollama, LM Studio, privacy, or pointing opencode/Cline/Pi at localhost.
+description: Pick and wire a local coding model from detected hardware (RAM, chip, platform) and task. Use when asked about offline models, Ollama, LM Studio, privacy, or pointing opencode/Cline/Pi at localhost.
 license: Apache-2.0
 ---
 
@@ -8,14 +8,20 @@ license: Apache-2.0
 
 Token budget: this table only. Full model cards stay in the registry — never paste benchmarks into context.
 
-Requires `env-detect` (RAM, NPU/GPU).
+Requires `env-detect` (`RAM_GB` + `MAC_KIND`/`MAC_CHIP` on macOS, `NPU`/`GPU` elsewhere). Run the scan first; size by detected capability, not the assumed machine. On macOS see also `env-macos/references/capability-matrix.md`.
+
+## Apple Silicon / unified memory (also any Linux host with that much RAM)
 
 | RAM | Start with | Agentic upgrade |
 |-----|------------|-----------------|
-| 16 GB | Phi-4 / Gemma 4 12B | — |
-| 32–36 GB | Llama 3.3 8B / Gemma 4 12B-mlx | Qwen2.5-Coder-14B |
-| 64 GB | Qwen2 34B | Qwen3-Coder-30B-A3B (256K ctx, best all-rounder), Devstral-24B (tool-calling) |
-| 128 GB+ | Llama 3.3 70B | Qwen3-Coder 480B needs 250 GB+ — datacenter only |
+| ≤16 GB | Phi-4 / Gemma 4 12B q4 | — |
+| 16–32 GB | Llama 3.3 8B / Gemma 4 12B-mlx | Qwen2.5-Coder-14B (24B tight) |
+| 32–48 GB | Qwen3-Coder-30B-A3B (MoE) | 256K-ctx variant (best all-rounder); Devstral-24B (tool-calling) |
+| 64 GB+ | Qwen3-Coder-30B-A3B | Llama 3.3 70B q4; Qwen3-Coder 480B needs 250 GB+ — datacenter only |
+
+## Intel Mac (non-unified)
+
+No MLX acceleration (avoid `-mlx` tags — CPU-speed there). iGPU-only: ≤3B comfortable, 8B q4 for short tasks. dGPU is VRAM-bound (check `system_profiler SPDisplaysDataType`): 8 GB VRAM → 8B q4, 16 GB → 14B q4. Above that use a remote endpoint — thrashing a local pull is worse than its latency.
 
 Wiring: Ollama `http://localhost:11434`, LM Studio `http://localhost:1234`. Cline: provider Ollama + baseURL. OpenCode: OpenAI-compatible provider with `baseURL`. Pi: `ollama launch pi --model <tag>`. Keep tasks small — local ctx is tighter than cloud; prefer 14B+ for multi-file refactors, 7B is fine for single-file CLIs. Record pick in `AGENTS.md`.
 

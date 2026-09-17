@@ -6,7 +6,7 @@
 4. Keep body < 500 lines (ideal < 60); put docs in `references/`, runnable code in `scripts/`.
 5. Include `Token budget` + `Quality gate` sections; prove the gate with run output.
 6. Run `python3 scripts/validate-skills.py`.
-6. Add row to `docs/compatibility.md` if it is OS/agent-specific.
-7. PR with: what machine/workflow it optimizes, verification evidence (`doctor` output / before-after tokens).
+7. Add a bullet to `docs/compatibility.md` noting the skill ↔ OS/agent constraint if it is OS/agent-specific.
+8. PR with: what machine/workflow it optimizes, verification evidence (`doctor` output / before-after tokens).
 
 No secrets in PRs. Installer changes must stay idempotent (safe re-run).

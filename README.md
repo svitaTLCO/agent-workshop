@@ -75,7 +75,8 @@ npx skills add svitaTLCO/agent-workshop -s agent-onboard -a opencode -a claude-c
 git clone https://github.com/svitaTLCO/agent-workshop.git
 cd agent-workshop
 ./scripts/install.sh --global
-# or: ./scripts/install.sh --project --agents opencode,claude-code,codex
+# or project-scoped, copied instead of symlinked: ./scripts/install.sh --project --copy
+# note: the bash installer ignores --agents/--skills selection (fixed target dirs); use the npx route above for per-agent/per-skill picks
 ```
 
 ### Windows
@@ -130,11 +131,12 @@ Pick a preset, or let the detector choose based on your machine:
 |---|---|---|
 | 🪶 `minimal` | Any box, lowest footprint | `agent-onboard`, `env-detect`, `context-diet` |
 | ⚡ `power` | Daily dev machine | `shell-rtk`, `mcp-essentials`, `memory-system` |
+| 🖥️ `windows-native` | Pure native Windows dev box (no WSL dependency) | `power` + `env-windows` |
 | 🪟 `windows-wsl` | WSL2 interop setups | `power` + `env-wsl` |
 | 🍏 `mac-npu` | Apple Silicon, 32 GB+ | `power` + `env-macos`, `local-models` |
 | 📡 `airgapped` | Offline / air-gapped boxes | `minimal` + OS env + `local-models` |
 
-Full breakdown in [`docs/profiles.md`](docs/profiles.md).
+Reference table in [`docs/profiles.md`](docs/profiles.md).
 
 ## Module Catalog 🧰
 
@@ -144,11 +146,11 @@ skills/
   🧪 quality-gates      definition of done + verification ladder
   🥗 context-diet       subtractive context engineering + budgets
   🧭 env-detect         OS / arch / WSL / RAM / tool probe
-  🪟 env-wsl            WSL2 interop, paths, Docker, VS Code remote
-  🍏 env-macos          Apple Silicon + Ollama MLX wiring
-  🐧 env-linux          systemd, apt/dnf, Docker, shells
-  🖥️  env-windows        pwsh, winget, WSL bridge
-  ⌨️  shell-rtk          token-optimized shell wrapper (60–90% savings)
+  🪟 env-wsl            WSL2 home: paths, Docker, daemons/persistence, USB/GPU, network tuning
+  🍏 env-macos          capability scan (Silicon vs Intel split), Ollama MLX, brew services, local-model tiers
+  🐧 env-linux          systemd daemons, apt/dnf/pacman, toolchains & GPU stacks (CUDA/ROCm/Vulkan), USB/udev, desktop-or-headless
+  🖥️  env-windows        pwsh, winget, workload routing, native builds, daemons/Ollama/Docker
+  ⌨️  shell-rtk          token-optimized shell wrapper (60–99% savings)
   🧮 local-models       RAM-based model picker + agent wiring
   🔌 mcp-essentials     minimal MCP set per task
   💾 memory-system      global + project MEMORY.md wiring
