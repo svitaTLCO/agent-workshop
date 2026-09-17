@@ -17,3 +17,13 @@ Any change that grows context without measured quality gain is a regression.
 - Never commit secrets. Keys live in env files, never in repo.
 - Keep `README.md`, `templates/`, `scripts/`, `docs/quality-token-contract.md` consistent with any skill change.
 - Validate with `python3 scripts/validate-skills.py` before finishing.
+
+## Agent skills
+
+### Issue tracker
+
+Issues live as local markdown under `.scratch/<effort>/`; see `docs/agents/issue-tracker.md`.
+
+### Domain docs
+
+Single-context: `CONTEXT.md` + `docs/adr/` at root; see `docs/agents/domain.md`.
