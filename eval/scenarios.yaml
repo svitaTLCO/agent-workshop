@@ -1,0 +1,345 @@
+# Scenario suite for skill-trigger evaluation. FROZEN after human approval (map Notes);
+# any later edit invalidates comparability and forces a re-baseline.
+# Schema: flat records; judge-side invocation is owned by harness design (ticket 04).
+version: 1
+status: frozen:2026-09-17
+scenarios:
+  # ── positives (3/target: canonical | paraphrase | edge) ─────────────────────
+  - id: scn-agent-onboard-p1
+    target: agent-onboard
+    kind: positive
+    prompt: "init my agent on this new machine"
+    expected: agent-onboard
+    note: canonical — trigger phrase verbatim from description
+  - id: scn-agent-onboard-p2
+    target: agent-onboard
+    kind: positive
+    prompt: "I just got a fresh laptop, set everything up so the coding agents work here"
+    expected: agent-onboard
+    note: paraphrase
+  - id: scn-agent-onboard-p3
+    target: agent-onboard
+    kind: positive
+    prompt: "refresh my skills on this box, something feels stale"
+    expected: agent-onboard
+    note: edge — refresh clause
+  - id: scn-context-diet-p1
+    target: context-diet
+    kind: positive
+    prompt: "my AGENTS.md is bloated, trim it down"
+    expected: context-diet
+    note: canonical
+  - id: scn-context-diet-p2
+    target: context-diet
+    kind: positive
+    prompt: "context rot again — clean up my instruction files before they bloat further"
+    expected: context-diet
+    note: paraphrase — "context rots" clause
+  - id: scn-context-diet-p3
+    target: context-diet
+    kind: positive
+    prompt: "before I add any more MCP servers or docs, make sure my prompt files stay lean"
+    expected: context-diet
+    note: edge — pre-addition diet; co-owned phrasing, see nm5/nm6
+  - id: scn-env-detect-p1
+    target: env-detect
+    kind: positive
+    prompt: "probe what this machine is — OS, arch, shell, GPU"
+    expected: env-detect
+    note: canonical
+  - id: scn-env-detect-p2
+    target: env-detect
+    kind: positive
+    prompt: "figure out whether I'm in WSL or a container before we configure anything"
+    expected: env-detect
+    note: paraphrase
+  - id: scn-env-detect-p3
+    target: env-detect
+    kind: positive
+    prompt: "which CLIs are actually installed on this box?"
+    expected: env-detect
+    note: edge — installed-CLIs corner
+  - id: scn-env-linux-p1
+    target: env-linux
+    kind: positive
+    prompt: "set up this Debian server as a home for my coding agents"
+    expected: env-linux
+    note: canonical
+  - id: scn-env-linux-p2
+    target: env-linux
+    kind: positive
+    prompt: "install what's missing on this Ubuntu box — apt packages, systemd user service, docker, build toolchain"
+    expected: env-linux
+    note: paraphrase
+  - id: scn-env-linux-p3
+    target: env-linux
+    kind: positive
+    prompt: "my headless RHEL server mangles UTF-8 — fix the encoding and locale"
+    expected: env-linux
+    note: edge — headless + encoding/locale corner
+  - id: scn-env-macos-p1
+    target: env-macos
+    kind: positive
+    prompt: "configure my M3 Mac as a home for coding agents"
+    expected: env-macos
+    note: canonical
+  - id: scn-env-macos-p2
+    target: env-macos
+    kind: positive
+    prompt: "given my unified memory, which local model fits this Mac?"
+    expected: env-macos
+    note: paraphrase — chip/memory-pressure corner; sizing also lives in local-models (known duplication)
+  - id: scn-env-macos-p3
+    target: env-macos
+    kind: positive
+    prompt: "wire up ollama with MLX on my Apple Silicon mac and register the brew services"
+    expected: env-macos
+    note: edge
+  - id: scn-env-windows-p1
+    target: env-windows
+    kind: positive
+    prompt: "set up native Windows — pwsh and winget — as a home for my agents"
+    expected: env-windows
+    note: canonical
+  - id: scn-env-windows-p2
+    target: env-windows
+    kind: positive
+    prompt: "get MSVC vcvars native builds working on my Win32 box, no WSL"
+    expected: env-windows
+    note: paraphrase — explicit non-WSL stance
+  - id: scn-env-windows-p3
+    target: env-windows
+    kind: positive
+    prompt: "route an adb/Android workload on Windows, daemons included"
+    expected: env-windows
+    note: edge — workload routing corner
+  - id: scn-env-wsl-p1
+    target: env-wsl
+    kind: positive
+    prompt: "my WSL2 docker bridge network isn't starting, fix it"
+    expected: env-wsl
+    note: canonical
+  - id: scn-env-wsl-p2
+    target: env-wsl
+    kind: positive
+    prompt: "switch wsl2 to mirrored networking — autoProxy leaks stopped happening?"
+    expected: env-wsl
+    note: paraphrase — networking-mode corner
+  - id: scn-env-wsl-p3
+    target: env-wsl
+    kind: positive
+    prompt: "tune wslconfig so my daemons survive VM restarts"
+    expected: env-wsl
+    note: edge — daemon persistence corner
+  - id: scn-local-models-p1
+    target: local-models
+    kind: positive
+    prompt: "pick a local coding model from my RAM and chip, then wire it up"
+    expected: local-models
+    note: canonical
+  - id: scn-local-models-p2
+    target: local-models
+    kind: positive
+    prompt: "point opencode at LM Studio running on localhost"
+    expected: local-models
+    note: paraphrase
+  - id: scn-local-models-p3
+    target: local-models
+    kind: positive
+    prompt: "privacy matters here — swap my cloud model for an offline one in Cline"
+    expected: local-models
+    note: edge — privacy/localhost-corner
+  - id: scn-mcp-essentials-p1
+    target: mcp-essentials
+    kind: positive
+    prompt: "attach the smallest useful MCP set for live prod errors"
+    expected: mcp-essentials
+    note: canonical
+  - id: scn-mcp-essentials-p2
+    target: mcp-essentials
+    kind: positive
+    prompt: "I need live docs and repo metadata without pasting blobs into the prompt"
+    expected: mcp-essentials
+    note: paraphrase
+  - id: scn-mcp-essentials-p3
+    target: mcp-essentials
+    kind: positive
+    prompt: "for this task, is a filesystem MCP even needed or do the built-ins cover it?"
+    expected: mcp-essentials
+    note: edge — minimality boundary
+  - id: scn-memory-system-p1
+    target: memory-system
+    kind: positive
+    prompt: "wire durable project memory so my corrections survive between sessions"
+    expected: memory-system
+    note: canonical
+  - id: scn-memory-system-p2
+    target: memory-system
+    kind: positive
+    prompt: "make your preferences stick even after context compaction"
+    expected: memory-system
+    note: paraphrase
+  - id: scn-memory-system-p3
+    target: memory-system
+    kind: positive
+    prompt: "a failure mode keeps recurring — remember it globally, not just for this project"
+    expected: memory-system
+    note: edge — global vs project scope
+  - id: scn-quality-gates-p1
+    target: quality-gates
+    kind: positive
+    prompt: "apply the definition-of-done and verification ladder to this task"
+    expected: quality-gates
+    note: canonical
+  - id: scn-quality-gates-p2
+    target: quality-gates
+    kind: positive
+    prompt: "I doubt the quality of what you just shipped — run the gates before we accept it"
+    expected: quality-gates
+    note: paraphrase — doubt clause
+  - id: scn-quality-gates-p3
+    target: quality-gates
+    kind: positive
+    prompt: "before merging this refactor, tell me exactly what must hold"
+    expected: quality-gates
+    note: edge — pre-merge verification
+  - id: scn-shell-rtk-p1
+    target: shell-rtk
+    kind: positive
+    prompt: "run my git and test commands through rtk to cut context"
+    expected: shell-rtk
+    note: canonical
+  - id: scn-shell-rtk-p2
+    target: shell-rtk
+    kind: positive
+    prompt: "docker logs are flooding the context — route them through the token optimizer"
+    expected: shell-rtk
+    note: paraphrase
+  - id: scn-shell-rtk-p3
+    target: shell-rtk
+    kind: positive
+    prompt: "kubectl get pods output is enormous — trim it with rtk"
+    expected: shell-rtk
+    note: edge — kubectl corner
+  - id: scn-skill-creator-p1
+    target: skill-creator
+    kind: positive
+    prompt: "create a new skill wrapping this CLI trick"
+    expected: skill-creator
+    note: canonical
+  - id: scn-skill-creator-p2
+    target: skill-creator
+    kind: positive
+    prompt: "lint-check the skill I drafted against the template"
+    expected: skill-creator
+    note: paraphrase
+  - id: scn-skill-creator-p3
+    target: skill-creator
+    kind: positive
+    prompt: "turn my personal workflow into a spec-compliant skill for this repo"
+    expected: skill-creator
+    note: edge
+  - id: scn-template-p1
+    target: template
+    kind: positive
+    prompt: "copy the template directory to scaffold a brand-new skill"
+    expected: template
+    note: canonical — skeleton-level ask, distinct from full skill-creator flow
+  - id: scn-template-p2
+    target: template
+    kind: positive
+    prompt: "open the template SKILL.md and show me the required frontmatter lines"
+    expected: template
+    note: paraphrase — structure inspection
+  - id: scn-template-p3
+    target: template
+    kind: positive
+    prompt: "validate-skills rejected my new skill — diff mine against the template"
+    expected: template
+    note: edge — conformance diff
+  # ── near-misses (cross-skill collisions, global argmax labels) ──────────────
+  - id: scn-nm1
+    target: [env-windows, env-wsl]
+    kind: near-miss
+    prompt: "I run WSL on my PC, but the setup I actually need is on the native Windows side — do that"
+    expected: env-windows
+    note: WSL red herring; native side wins
+  - id: scn-nm2
+    target: [local-models, env-linux]
+    kind: near-miss
+    prompt: "on my Linux laptop ollama struggles to serve the model — which model fits anyway?"
+    expected: local-models
+    note: hardware-to-model decision owned by local-models, not env-linux
+  - id: scn-nm3
+    target: [env-linux, agent-onboard]
+    kind: near-miss
+    prompt: "fresh Ubuntu VPS — configure packages, user services, toolchain for coding agents"
+    expected: env-linux
+    note: distro-specific configuration, not agent bootstrap
+  - id: scn-nm4
+    target: [agent-onboard, env-linux]
+    kind: near-miss
+    prompt: "bootstrap this fresh machine for my agents — what's missing, init the environment"
+    expected: agent-onboard
+    note: machine-agnostic onboarding, no distro named
+  - id: scn-nm5
+    target: [mcp-essentials, context-diet]
+    kind: near-miss
+    prompt: "add the docs MCP server my agent needs"
+    expected: mcp-essentials
+    note: attach-a-set ask; co-owned with context-diet per gap analysis
+  - id: scn-nm6
+    target: [context-diet, mcp-essentials]
+    kind: near-miss
+    prompt: "my prompts ballooned because I stuffed MCP docs into them — slim the whole thing down"
+    expected: context-diet
+    note: bloat complaint, not attach-a-set
+  - id: scn-nm7
+    target: [quality-gates, (none)]
+    kind: near-miss
+    prompt: "refactor the parser module while you're in there"
+    expected: null
+    note: DELIBERATE CONTENDED LABEL — quality-gates description covers "refactoring"; baseline false-positive expected here, drop measured after rewrite (gap #5)
+  - id: scn-nm8
+    target: [quality-gates, (none)]
+    kind: near-miss
+    prompt: "check my last commit against the definition of done before I push"
+    expected: quality-gates
+    note: true positive inside the cluster, balances nm7
+  # ── no-skill controls (expected: nothing fires) ─────────────────────────────
+  - id: scn-ctl1
+    target: (none)
+    kind: control
+    prompt: "write a python function that parses this csv, with unit tests"
+    expected: null
+    note: pure in-codebase task
+  - id: scn-ctl2
+    target: (none)
+    kind: control
+    prompt: "explain how virtual-DOM reconciliation works"
+    expected: null
+    note: concept explanation
+  - id: scn-ctl3
+    target: (none)
+    kind: control
+    prompt: "summarize these meeting notes into action items"
+    expected: null
+    note: off-domain
+  - id: scn-ctl4
+    target: (none)
+    kind: control
+    prompt: "what does scripts/validate-skills.py check for?"
+    expected: null
+    note: repo-meta question about a linter file, not skill authoring
+  - id: scn-ctl5
+    target: (none)
+    kind: control
+    prompt: "my AWS EC2 instance crashes at boot — help me debug it"
+    expected: null
+    note: adjacent-domain decoy; corpus is local-machine scoped
+  - id: scn-ctl6
+    target: (none)
+    kind: control
+    prompt: "should I store audit logs in sqlite or postgres?"
+    expected: null
+    note: tech-choice decoy; no storage skill in corpus
