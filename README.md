@@ -174,7 +174,7 @@ See [`docs/quality-token-contract.md`](docs/quality-token-contract.md) for the f
 - 🔒 **Never prints or commits secrets** — key presence checks only, values stay in env files
 - 📦 **Official package sources only** — `brew`, `apt`, `winget`, `npm -g`; no curl-pipe
 - 🔁 **Idempotent installer** — safe to re-run, no drift
-- ✅ **Spec validation** — `python3 scripts/validate-skills.py` enforces naming, description, and body limits
+- ✅ **Spec validation** — `python3 scripts/validate-skills.py` enforces naming, description, body limits, and per-skill token-budget/quality-gate declarations
 
 ## Repo Map 🗺️
 
@@ -205,10 +205,12 @@ agent-workshop/
 ## Roadmap 🛰️
 
 - [x] 13 spec-valid skills + meta-skill onboarding loop
-- [x] Horizontal quality + token invariants across all core artifacts
+- [x] Horizontal quality + token invariants across all core artifacts (machine-enforced by `validate-skills.py`)
 - [x] Cross-agent installer (Bash + PowerShell)
+- [x] Standalone-home env skills (Linux / WSL / macOS / Windows) with verify + diagnose gate pairs
+- [x] Full Apache-2.0 license text in `LICENSE`
 - [ ] End-to-end CI validation badge
-- [ ] Full Apache-2.0 license text in `LICENSE`
+- [ ] `--agents`/`--skills` selection honored by `install.sh` (documented no-op today)
 - [ ] Richer per-agent discovery adapters beyond the shared `.agents/` path
 
 ## Contributing 🤝

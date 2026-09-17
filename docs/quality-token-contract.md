@@ -7,6 +7,7 @@ The repo's promise: **better output, fewer tokens.** This is a cross-cutting inv
 - `AGENTS.md`: ≤ 150 lines project, ≤ 80 global. Over → split into a skill.
 - `SKILL.md` body: < 500 lines hard, < 60 ideal. Rest → `references/` (loaded on demand) or `scripts/` (run, not read).
 - Skill frontmatter (name + description) is the only always-loaded cost. Descriptions 1–1024 chars, specific enough to trigger correctly and short enough to list dozens.
+- Every `SKILL.md` body declares `Token budget` (what stays unloaded by default) + `Quality gate` (the executable check proving it worked); `scripts/validate-skills.py` rejects skills missing either.
 - Tool output: `rtk`-filtered by default (failures/errors only). Full logs only on failure, via `rtk log` / `rtk err`.
 - MCP: start with zero servers; add one per demonstrated need; drop when done.
 - Retrieval: targeted structural search (aim ~5K tokens) over whole-repo dumps. Never pad context "to be safe".
