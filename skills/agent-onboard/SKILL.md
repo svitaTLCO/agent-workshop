@@ -16,10 +16,10 @@ Trigger phrases (EN/中文): `init my agent`, `set up`, `bootstrap`, `configure 
 
 Run `bash scripts/detect-env.sh` from repo root. Then check:
 
-- Skills present in agent discovery paths (`.opencode/skills/`, `~/.config/opencode/skills/`, `.claude/skills/`, `~/.claude/skills/`, `.agents/skills/`, `~/.agents/skills/`).
+- Skills present in agent discovery paths (per-agent global + project dirs: adapter table in `docs/compatibility.md`).
+- Agents present: `HAS_*` flags from `detect-env.sh` (opencode, claude-code, codex, pi, cursor, aider).
 - CLIs: `rtk`, `ollama`, `docker`, `gh`, `node`, `python3`.
 - Keys: only presence (env var set?), never print values.
-- Agent identity: config dirs / binaries / env vars for opencode, claude-code, codex, pi, cursor.
 
 ## Step 2 — Detect agents
 

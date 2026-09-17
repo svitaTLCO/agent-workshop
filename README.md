@@ -74,16 +74,19 @@ npx skills add svitaTLCO/agent-workshop -s agent-onboard -a opencode -a claude-c
 ```bash
 git clone https://github.com/svitaTLCO/agent-workshop.git
 cd agent-workshop
-./scripts/install.sh --global
-# or project-scoped, copied instead of symlinked: ./scripts/install.sh --project --copy
-# note: the bash installer ignores --agents/--skills selection (fixed target dirs); use the npx route above for per-agent/per-skill picks
+./scripts/install.sh                                  # global; auto-detects agents present on this machine
+./scripts/install.sh --agents opencode,claude-code --skills context-diet   # per-agent + per-skill picks (validated)
+./scripts/install.sh --project --copy                 # project-scoped (./.opencode, ./.claude, ./.agents next to cwd), copied not symlinked
 ```
 
 ### Windows
 
 ```powershell
-pwsh scripts/install.ps1
+powershell -File scripts/install.ps1                                     # global; auto-detects agents
+powershell -File scripts/install.ps1 -Agents opencode,codex -Project      # per-agent picks, project-scoped (copy mode)
 ```
+
+Same adapter table as `install.sh`; not yet run on a Windows host — verify per `docs/compatibility.md`.
 
 ### Then, inside any agent:
 
@@ -193,7 +196,7 @@ agent-workshop/
 ├── scripts/
 │   ├── detect-env.sh       # machine fingerprint
 │   ├── install.sh          # bash installer (symlink or copy)
-│   ├── install.ps1         # PowerShell installer
+│   ├── install.ps1         # PowerShell installer (same adapter table, copy mode)
 │   └── validate-skills.py  # spec compliance linter
 ├── docs/
 │   ├── compatibility.md    # agent/path mapping
@@ -210,8 +213,8 @@ agent-workshop/
 - [x] Standalone-home env skills (Linux / WSL / macOS / Windows) with verify + diagnose gate pairs
 - [x] Full Apache-2.0 license text in `LICENSE`
 - [ ] End-to-end CI validation badge
-- [ ] `--agents`/`--skills` selection honored by `install.sh` (documented no-op today)
-- [ ] Richer per-agent discovery adapters beyond the shared `.agents/` path
+- [x] `--agents`/`--skills`/`--project` selection honored by `install.sh` (validated; quality gate `scripts/test-install.sh`)
+- [x] Richer per-agent discovery adapters beyond the shared `.agents/` path (adapter table in `install.sh` + `docs/compatibility.md`; presence probes in `detect-env.sh`)
 
 ## Contributing 🤝
 
