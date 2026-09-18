@@ -1,0 +1,1 @@
+{"completion_tokens":13,"elapsed_s":2.1,"error":null,"expected":"context-diet","finish":"stop","http":200,"kind":"smoke","lane":"azure","match":true,"prompt_tokens":812,"reasoning_tokens":0,"repeat":1,"scen_kind":"positive","scenario_id":"scn-context-diet-p1","selected":"context-diet","target":"context-diet","ts":"2026-09-17T17:03:57"}

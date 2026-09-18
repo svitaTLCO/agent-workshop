@@ -1,0 +1,70 @@
+caps:
+  azure: 1500
+  galene: 100
+catalog_chars: 5070
+catalog_names:
+- agent-onboard
+- context-diet
+- env-detect
+- env-linux
+- env-macos
+- env-windows
+- env-wsl
+- local-models
+- mcp-essentials
+- memory-system
+- quality-gates
+- shell-rtk
+- skill-creator
+- template-skill
+catalog_sha: 4808c0b18094
+corpus: draft
+corpus_paths:
+- .scratch/skill-prompt-research/drafts/agent-onboard/SKILL.md
+- .scratch/skill-prompt-research/drafts/context-diet/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-detect/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-linux/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-macos/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-windows/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-wsl/SKILL.md
+- .scratch/skill-prompt-research/drafts/local-models/SKILL.md
+- .scratch/skill-prompt-research/drafts/mcp-essentials/SKILL.md
+- .scratch/skill-prompt-research/drafts/memory-system/SKILL.md
+- .scratch/skill-prompt-research/drafts/quality-gates/SKILL.md
+- .scratch/skill-prompt-research/drafts/shell-rtk/SKILL.md
+- .scratch/skill-prompt-research/drafts/skill-creator/SKILL.md
+- .scratch/skill-prompt-research/drafts/skill-creator/template/SKILL.md
+date: '2026-09-17'
+degraded: false
+kind: trial
+lanes:
+- azure
+made_calls:
+  azure: 15
+max_completion_tokens: 256
+model_pins:
+  azure: azure openai deployment gpt-5.4 @ ai-hub-fantuzzi (api-version 2024-12-01-preview)
+python: 3.12.3
+r: 5
+run_id: t1-solo-envdetect-001
+suite_records: 56
+suite_sha: 8c261a1d0b4e
+suite_subset:
+- scn-env-detect-p1
+- scn-env-detect-p2
+- scn-env-detect-p3
+template: 'You are an agent that can load specialized skill instructions by name.
+  Read the user''s request. If a listed skill is clearly applicable to the task, select
+  it; if none applies, select nothing. Select at most one skill.
+
+
+  Available skills:
+
+  %s
+
+
+  Respond with JSON only: {"skill": "<name>"} or {"skill": null}'
+wrapper_constants:
+  azure: 77
+  galene: 123
+  provenance: empty-catalog 'ping' under template T, 2026-09-17

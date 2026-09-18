@@ -33,8 +33,27 @@ Harness metric: for a scenario, the agent loads the right skill, or correctly lo
 **Context cost**:
 Harness metric: prompt-material tokens the agent pulls while handling a scenario.
 
+**Trial**:
+The R repeat calls of one scenario on one lane (R=5 default), adjudicated by strict majority vote: ties yield no verdict, non-unanimous splits flag the scenario UNSTABLE. (The run *kind* named trial means a run against the post-rewrite corpus.)
+
+**Run**:
+One harness invocation over a suite subset on one or more lanes, identified by run-id and stored under `eval/runs/` (committed manifest/results/summary; gitignored raw payloads). Every call of every kind counts toward the campaign caps.
+
+**Lane**:
+An evaluation ruler: the pinned Azure deployment `gpt-5.4` (`azure`) or the local galene endpoint `Galene/LLM` (`galene`). Both receive byte-identical canonical requests; readings are never pooled across lanes.
+
+**Material tokens**:
+Prompt tokens attributable to task content: measured prompt tokens minus the lane's wrapper constant C0 (tokens consumed by the template and an empty catalog). Isolates corpus cost from fixed framing in cross-corpus comparisons.
+
 **Baseline**:
 Harness readings of the corpus taken before any enhancement; every proposal reports its delta against this.
+
+**Noise floor**:
+Measured trial instability: a scenario split across Baseline repeats is UNSTABLE; a gain resting solely on flipping an UNSTABLE scenario is inconclusive.
+
+**Verdict**:
+A rewrite draft's pre/post comparison against the Baseline classified as IMPROVED, NEUTRAL, or REGRESSED.
+_Avoid_: result, score
 
 ## Artifact
 

@@ -1,0 +1,83 @@
+caps:
+  azure: 1500
+  galene: 100
+catalog_chars: 5070
+catalog_names:
+- agent-onboard
+- context-diet
+- env-detect
+- env-linux
+- env-macos
+- env-windows
+- env-wsl
+- local-models
+- mcp-essentials
+- memory-system
+- quality-gates
+- shell-rtk
+- skill-creator
+- template-skill
+catalog_sha: 4808c0b18094
+corpus: draft
+corpus_paths:
+- .scratch/skill-prompt-research/drafts/agent-onboard/SKILL.md
+- .scratch/skill-prompt-research/drafts/context-diet/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-detect/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-linux/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-macos/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-windows/SKILL.md
+- .scratch/skill-prompt-research/drafts/env-wsl/SKILL.md
+- .scratch/skill-prompt-research/drafts/local-models/SKILL.md
+- .scratch/skill-prompt-research/drafts/mcp-essentials/SKILL.md
+- .scratch/skill-prompt-research/drafts/memory-system/SKILL.md
+- .scratch/skill-prompt-research/drafts/quality-gates/SKILL.md
+- .scratch/skill-prompt-research/drafts/shell-rtk/SKILL.md
+- .scratch/skill-prompt-research/drafts/skill-creator/SKILL.md
+- .scratch/skill-prompt-research/drafts/skill-creator/template/SKILL.md
+date: '2026-09-17'
+degraded: false
+kind: trial
+lanes:
+- galene
+made_calls:
+  galene: 80
+max_completion_tokens: 256
+model_pins:
+  galene: local vllm lane Galene/LLM via http://127.0.0.1:8787/v1
+python: 3.12.3
+r: 5
+run_id: post-final-galene-001
+suite_records: 56
+suite_sha: 8c261a1d0b4e
+suite_subset:
+- scn-context-diet-p1
+- scn-env-macos-p1
+- scn-env-windows-p1
+- scn-env-wsl-p1
+- scn-local-models-p1
+- scn-mcp-essentials-p1
+- scn-memory-system-p1
+- scn-quality-gates-p1
+- scn-quality-gates-p2
+- scn-quality-gates-p3
+- scn-template-p1
+- scn-template-p2
+- scn-template-p3
+- scn-nm5
+- scn-nm7
+- scn-ctl1
+template: 'You are an agent that can load specialized skill instructions by name.
+  Read the user''s request. If a listed skill is clearly applicable to the task, select
+  it; if none applies, select nothing. Select at most one skill.
+
+
+  Available skills:
+
+  %s
+
+
+  Respond with JSON only: {"skill": "<name>"} or {"skill": null}'
+wrapper_constants:
+  azure: 77
+  galene: 123
+  provenance: empty-catalog 'ping' under template T, 2026-09-17
