@@ -17,6 +17,7 @@ Any change that grows context without measured quality gain is a regression.
 - Never commit secrets. Keys live in env files, never in repo.
 - Keep `README.md`, `templates/`, `scripts/`, `docs/quality-token-contract.md` consistent with any skill change.
 - Validate with `python3 scripts/validate-skills.py` before finishing.
+- Skill authoring rules live in `docs/skill-authoring-standard.md` (description craft, body discipline, eval-gated promotion).
 
 ## Agent skills
 

@@ -201,7 +201,8 @@ agent-workshop/
 ├── docs/
 │   ├── compatibility.md    # agent/path mapping
 │   ├── profiles.md         # preset definitions
-│   └── quality-token-contract.md
+│   ├── quality-token-contract.md
+│   └── skill-authoring-standard.md
 └── .claude-plugin/         # Claude plugin manifest
 ```
 
