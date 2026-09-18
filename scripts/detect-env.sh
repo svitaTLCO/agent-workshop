@@ -52,7 +52,7 @@ for f in "$HOME/.config/opencode/opencode.json" "$HOME/.config/opencode/opencode
 done
 if [ "$mcp" -eq 0 ] && [ -f "$HOME/.codex/config.toml" ] && grep -qE '^[[:space:]]*\[mcp_servers\.' "$HOME/.codex/config.toml"; then mcp=1; fi
 echo "HAS_MCP=$mcp"
-agent_has(){ command -v "$1" >/dev/null 2>&1 && echo 1 || { [ -n "${2:-}" ] && [ -e "$HOME/$2" ] && echo 1 || echo 0; }; }
+agent_has(){ if command -v "$1" >/dev/null 2>&1; then echo 1; elif [ -n "${2:-}" ] && [ -e "$HOME/$2" ]; then echo 1; else echo 0; fi; }
 echo "HAS_OPENCODE=$(agent_has opencode .config/opencode)"; echo "HAS_CLAUDE_CODE=$(agent_has claude .claude)"
 echo "HAS_CODEX=$(agent_has codex .codex)"; echo "HAS_PI=$(agent_has pi .pi)"
 echo "HAS_CURSOR=$(agent_has cursor .cursor)"; echo "HAS_AIDER=$(agent_has aider .aider.conf.yml)"

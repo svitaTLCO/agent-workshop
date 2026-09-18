@@ -1,0 +1,38 @@
+name: validate
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: actions/setup-python@v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Structural and profile validators
+        run: |
+          python3 scripts/validate-skills.py
+          python3 scripts/check-profiles.py
+      - uses: actions/setup-node@v7.0.0
+        with:
+          node-version: 22
+      - name: Installer regression tests
+        run: bash scripts/test-install.sh
+      - name: Consumer discovery validation
+        run: bash scripts/test-skill-discovery.sh
+      - name: ShellCheck
+        run: |
+          docker run --rm --entrypoint sh -v "$PWD":/workspace:ro -w /workspace \
+            koalaman/shellcheck-alpine:v0.10.0 \
+            -c 'shellcheck scripts/install.sh scripts/test-install.sh scripts/detect-env.sh scripts/test-skill-discovery.sh'
+
+  windows-installer:
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - name: Test PowerShell installer
+        shell: powershell
+        run: ./scripts/test-install.ps1

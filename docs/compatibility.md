@@ -20,12 +20,11 @@ Unknown agent/skill names exit non-zero listing valid options. Quality gate: `ba
 Notes: Pi natively also reads `~/.pi/agent/skills/` (global) and `.pi/skills/` (project); Codex follows
 symlinked skill dirs and scans `$CWD/.agents/skills` up to the repo root. The installer targets the shared
 `.agents/skills` so one copy serves codex/pi/cursor/aider. Copy mode stamps `.agent-workshop-installed`
-inside each installed dir; re-copying a managed dir is silent, replacing an unmanaged one warns first.
+inside each installed dir; re-copying a managed dir is silent, replacing an unmanaged one is refused (exit 2).
 
 Root `AGENTS.md` is read by Codex/opencode/Pi; `CLAUDE.md` shim points to it — no duplicated config.
 OS routing: `env-detect` → `env-wsl` (IS_WSL=1) / `env-macos` (darwin) / `env-linux` / `env-windows`.
 
-`install.ps1` mirrors the same table, validation, auto-detect and `-Project` scope (copy mode only;
-symlinks need dev rights). It targets Windows PowerShell 5.1 and has not been executed on a Windows host;
-verify: `powershell -File scripts/install.ps1 -Agents opencode -Skills context-diet -Project`, then check
-`.opencode\skills` and `.claude\skills` under the cwd.
+`install.ps1` mirrors the same table, validation, auto-detect, `-Project` scope, and refusal contract
+(copy mode only; symlinks need dev rights). Quality gate: `pwsh scripts/test-install.ps1`
+(windows-latest job in `.github/workflows/validate.yml`).

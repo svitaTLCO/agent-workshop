@@ -8,7 +8,7 @@
 
 <br>
 
-![skills](https://img.shields.io/badge/skills-13%20spec--valid-brightgreen?style=for-the-badge)
+![skills](https://img.shields.io/badge/skills-14%20spec--valid-brightgreen?style=for-the-badge)
 ![quality](https://img.shields.io/badge/quality%20gates-execution--proven-purple?style=for-the-badge)
 ![tokens](https://img.shields.io/badge/tokens-budgeted-blue?style=for-the-badge)
 ![agents](https://img.shields.io/badge/agents-opencode%20%C2%B7%20claude%20%C2%B7%20codex%20%C2%B7%20pi%20%C2%B7%20cursor-orange?style=for-the-badge)
@@ -159,6 +159,7 @@ skills/
   🔌 mcp-essentials     minimal MCP set per task
   💾 memory-system      global + project MEMORY.md wiring
   🛠️  skill-creator      scaffold new skills with template + lint
+  🔎 repo-review         evidence-backed repository and PR review reports
 ```
 
 Templates, scripts, and docs live alongside — see [Repo Map](#repo-map).
@@ -177,8 +178,9 @@ See [`docs/quality-token-contract.md`](docs/quality-token-contract.md) for the f
 
 - 🔒 **Never prints or commits secrets** — key presence checks only, values stay in env files
 - 📦 **Official package sources only** — `brew`, `apt`, `winget`, `npm -g`; no curl-pipe
-- 🔁 **Idempotent installer** — safe to re-run, no drift
-- ✅ **Spec validation** — `python3 scripts/validate-skills.py` enforces naming, description, body limits, and per-skill token-budget/quality-gate declarations
+- 🔁 **Idempotent, data-safe installer** — safe to re-run, no drift; copy mode refuses to overwrite unmanaged skill dirs (exit 2)
+- ✅ **Spec validation** — `python3 scripts/validate-skills.py` enforces naming, description, body limits, and per-skill token-budget/quality-gate declarations (structural check only, not YAML)
+- 🔍 **Consumer discovery gate** — `scripts/test-skill-discovery.sh` executes the real installer CLI (`npx skills add ./ --list`) and fails on YAML parse errors or undiscovered skills
 
 ## Repo Map 🗺️
 
@@ -188,17 +190,21 @@ agent-workshop/
 ├── README.md               # you are here
 ├── CONTRIBUTING.md         # how to add your own “knife”
 ├── LICENSE                 # Apache-2.0
-├── skills/                 # 13 spec-valid agent skills
+├── skills/                 # 14 spec-valid agent skills
 │   ├── agent-onboard/
 │   ├── quality-gates/
 │   ├── context-diet/
-│   └── …                   # env, shell, models, memory, MCP, creator
+│   └── …                   # env, shell, models, memory, MCP, creator, review
 ├── templates/              # AGENTS.md base, CLAUDE.md shim, MEMORY.md
 ├── scripts/
+│   ├── check-profiles.py   # profile/doc consistency guard
 │   ├── detect-env.sh       # machine fingerprint
-│   ├── install.sh          # bash installer (symlink or copy)
-│   ├── install.ps1         # PowerShell installer (same adapter table, copy mode)
-│   └── validate-skills.py  # spec compliance linter
+│   ├── install.sh          # bash installer (symlink or copy; refuses unmanaged targets)
+│   ├── install.ps1         # PowerShell installer (same adapter table + ownership contract)
+│   ├── test-install.sh     # installer regression gate
+│   ├── test-install.ps1    # PowerShell installer regression gate (windows-latest)
+│   ├── test-skill-discovery.sh  # consumer discovery gate (npx skills add ./ --list)
+│   └── validate-skills.py  # structural spec compliance linter
 ├── docs/
 │   ├── compatibility.md    # agent/path mapping
 │   ├── profiles.md         # preset definitions
@@ -209,7 +215,7 @@ agent-workshop/
 
 ## Roadmap 🛰️
 
-- [x] 13 spec-valid skills + meta-skill onboarding loop
+- [x] 14 spec-valid skills + meta-skill onboarding loop
 - [x] Horizontal quality + token invariants across all core artifacts (machine-enforced by `validate-skills.py`)
 - [x] Cross-agent installer (Bash + PowerShell)
 - [x] Standalone-home env skills (Linux / WSL / macOS / Windows) with verify + diagnose gate pairs
@@ -227,6 +233,7 @@ Every PR must include:
 - ✅ Spec validation pass (`python3 scripts/validate-skills.py`)
 - ✅ Clear statement of which machine/workflow it optimizes
 - ✅ Verification evidence (`doctor` output or before/after token measurement)
+- ✅ CI green (`.github/workflows/validate.yml`: structure, profiles, installer regression, consumer discovery, shellcheck)
 - ✅ No secrets, no drift, no silent behavior changes
 
 ## License 📜

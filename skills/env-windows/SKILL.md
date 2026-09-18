@@ -1,6 +1,6 @@
 ---
 name: env-windows
-description: Configure native Windows (pwsh, winget) as the complete home for coding agents: packages, profiles, toolchains, MSVC/vcvars native builds, daemons and local models (Ollama, scheduled tasks), Docker, encoding pitfalls. WSL is only ever a suggestion, never a requirement. On WSL-capable machines the windows-wsl platform activates both this skill and env-wsl. Use on Win32 or when the agent runs in PowerShell/cmd; includes workload routing (Android/adb, embedded IoT, USB/serial devices).
+description: "Configure native Windows (pwsh, winget) as the complete home for coding agents: packages, profiles, toolchains, MSVC/vcvars native builds, daemons and local models (Ollama, scheduled tasks), Docker, encoding pitfalls. WSL is only ever a suggestion, never a requirement. On WSL-capable machines the windows-wsl platform activates both this skill and env-wsl. Use on Win32 or when the agent runs in PowerShell/cmd; includes workload routing (Android/adb, embedded IoT, USB/serial devices)."
 license: Apache-2.0
 ---
 

@@ -30,7 +30,7 @@ fi
 if [ "$SKILLS" = all ]; then SKILLS=$(ls "$ROOT/skills")
 else
   for s in $SKILLS; do
-    [ -d "$ROOT/skills/$s" ] || { echo "unknown skill: $s (valid: $(ls "$ROOT/skills" | tr '\n' ' '))" >&2; exit 1; }
+    [ -d "$ROOT/skills/$s" ] || { echo "unknown skill: $s (valid: $(find "$ROOT/skills" -mindepth 1 -maxdepth 1 -type d -printf '%f\n' | tr '\n' ' '))" >&2; exit 1; }
   done
 fi
 case $SCOPE in global) P=$HOME;; project) P=$PWD;; esac
@@ -46,8 +46,11 @@ while IFS= read -r b; do
   mkdir -p "$b"; c=$((c+1))
   for s in $SKILLS; do
     if [ "$MODE" = copy ]; then
-      if [ -d "$b/$s" ] && [ ! -e "$b/$s/$M" ]; then echo "warn: replacing unmanaged $b/$s (move it away first if you edited it)" >&2; fi
-      rm -rf "$b/$s"; cp -r "$ROOT/skills/$s" "$b/$s"; touch "$b/$s/$M"
+      if [ -d "$b/$s" ] && [ ! -e "$b/$s/$M" ]; then
+        echo "refusing to replace unmanaged $b/$s; move it aside or remove it explicitly first" >&2
+        exit 2
+      fi
+      rm -rf "${b:?}/${s:?}"; cp -r "$ROOT/skills/$s" "$b/$s"; touch "$b/$s/$M"
     else ln -sfn "$ROOT/skills/$s" "$b/$s"; fi
     n=$((n+1)); echo "-> [$SCOPE/$MODE] $b/$s"
   done

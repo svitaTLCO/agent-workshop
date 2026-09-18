@@ -16,7 +16,7 @@ Any change that grows context without measured quality gain is a regression.
 - Docs, templates, and scripts are held to the same invariant: minimal, executable, no filler lines; prefer references/scripts over prose; installer paths stay idempotent and verifiable.
 - Never commit secrets. Keys live in env files, never in repo.
 - Keep `README.md`, `templates/`, `scripts/`, `docs/quality-token-contract.md` consistent with any skill change.
-- Validate with `python3 scripts/validate-skills.py` before finishing; also run `python3 scripts/check-profiles.py` when touching profiles docs, onboard, env skills, or detect-env.sh.
+- Validate with `python3 scripts/validate-skills.py` before finishing (structural check only — not YAML); also run `python3 scripts/check-profiles.py` when touching profiles docs, onboard, env skills, or detect-env.sh. Installer/discovery changes are additionally gated by `bash scripts/test-install.sh`, `pwsh scripts/test-install.ps1` (windows-latest job), and `bash scripts/test-skill-discovery.sh` (invocations in `.github/workflows/validate.yml`).
 - Skill authoring rules live in `docs/skill-authoring-standard.md` (description craft, body discipline, eval-gated promotion).
 
 ## Agent skills
