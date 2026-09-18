@@ -223,6 +223,9 @@ agent-workshop/
 - [ ] End-to-end CI validation badge
 - [x] `--agents`/`--skills`/`--project` selection honored by `install.sh` (validated; quality gate `scripts/test-install.sh`)
 - [x] Richer per-agent discovery adapters beyond the shared `.agents/` path (adapter table in `install.sh` + `docs/compatibility.md`; presence probes in `detect-env.sh`)
+- [ ] Per-environment sysadmin skills (day-2 ops beyond the diagnose/verify pairs, per OS)
+- [ ] Dedicated memory layer (durable cross-session store beyond `memory-system`)
+- [ ] More battle-tested DevOps patterns (CI/CD, IaC, rollout/rollback runbooks)
 
 ## Contributing 🤝
 

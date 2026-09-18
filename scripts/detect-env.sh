@@ -44,10 +44,10 @@ echo "HAS_SYSTEMD=$has_systemd"; echo "GPU=$gpu"; echo "NPU=$npu"
 echo "HAS_RTK=$(has rtk)"; echo "HAS_OLLAMA=$(has ollama)"; echo "HAS_DOCKER=$(has docker)"
 echo "HAS_GH=$(has gh)"; echo "HAS_NODE=$(has node)"; echo "HAS_PYTHON=$(has python3)"
 mcp=0
-for f in "$HOME/.config/opencode/opencode.json" "$HOME/.config/opencode/opencode.jsonc" "$HOME/.claude/settings.json" "$HOME/.cursor/mcp.json" ".mcp.json"; do
+for f in "$HOME/.config/opencode/opencode.json" "$HOME/.config/opencode/opencode.jsonc" "$HOME/.claude/settings.json" "$HOME/.claude.json" "$HOME/.cursor/mcp.json" ".mcp.json" ".cursor/mcp.json" "opencode.json" "opencode.jsonc"; do
   if [ -f "$f" ]; then
     c=$(tr -d '\n\r' <"$f")
-    printf '%s' "$c" | grep -qE '"(mcpServers|mcp)"[[:space:]]*:[[:space:]]*\{[^}]*:[[:space:]]*"' && { mcp=1; break; }
+    printf '%s' "$c" | grep -qE '"(mcpServers|mcp)"[[:space:]]*:[[:space:]]*\{[[:space:]]*"[^"]+"[[:space:]]*:' && { mcp=1; break; }
   fi
 done
 if [ "$mcp" -eq 0 ] && [ -f "$HOME/.codex/config.toml" ] && grep -qE '^[[:space:]]*\[mcp_servers\.' "$HOME/.codex/config.toml"; then mcp=1; fi
