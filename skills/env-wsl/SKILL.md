@@ -1,6 +1,6 @@
 ---
 name: env-wsl
-description: Configure WSL2 as a complete home for coding agents. Use on WSL for paths, .exe bridging, Docker, VS Code remote, NVIDIA GPU passthrough (NVIDIA-only boundary), daemon persistence across VM restarts, networking modes (mirrored vs NAT, autoProxy leaks), USB devices via usbipd, or wslconfig tuning.
+description: Configure WSL2 as a complete home for coding agents. Use on WSL for paths, .exe bridging, Docker, VS Code remote, NVIDIA GPU passthrough (NVIDIA-only boundary), daemon persistence across VM restarts, networking modes (mirrored vs NAT, autoProxy leaks), USB devices via usbipd, or wslconfig tuning. Pairs with env-windows — on WSL-capable hosts the windows-wsl platform loads both skills.
 license: Apache-2.0
 ---
 

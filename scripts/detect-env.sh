@@ -43,6 +43,15 @@ echo "MAC_KIND=$mac_kind"; echo "MAC_CHIP=$mac_chip"; echo "CPU_CORES=$cpu_cores
 echo "HAS_SYSTEMD=$has_systemd"; echo "GPU=$gpu"; echo "NPU=$npu"
 echo "HAS_RTK=$(has rtk)"; echo "HAS_OLLAMA=$(has ollama)"; echo "HAS_DOCKER=$(has docker)"
 echo "HAS_GH=$(has gh)"; echo "HAS_NODE=$(has node)"; echo "HAS_PYTHON=$(has python3)"
+mcp=0
+for f in "$HOME/.config/opencode/opencode.json" "$HOME/.config/opencode/opencode.jsonc" "$HOME/.claude/settings.json" "$HOME/.cursor/mcp.json" ".mcp.json"; do
+  if [ -f "$f" ]; then
+    c=$(tr -d '\n\r' <"$f")
+    printf '%s' "$c" | grep -qE '"(mcpServers|mcp)"[[:space:]]*:[[:space:]]*\{[^}]*:[[:space:]]*"' && { mcp=1; break; }
+  fi
+done
+if [ "$mcp" -eq 0 ] && [ -f "$HOME/.codex/config.toml" ] && grep -qE '^[[:space:]]*\[mcp_servers\.' "$HOME/.codex/config.toml"; then mcp=1; fi
+echo "HAS_MCP=$mcp"
 agent_has(){ command -v "$1" >/dev/null 2>&1 && echo 1 || { [ -n "${2:-}" ] && [ -e "$HOME/$2" ] && echo 1 || echo 0; }; }
 echo "HAS_OPENCODE=$(agent_has opencode .config/opencode)"; echo "HAS_CLAUDE_CODE=$(agent_has claude .claude)"
 echo "HAS_CODEX=$(agent_has codex .codex)"; echo "HAS_PI=$(agent_has pi .pi)"

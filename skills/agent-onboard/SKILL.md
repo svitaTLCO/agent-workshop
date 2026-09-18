@@ -27,14 +27,14 @@ Map what you found to the `npx skills` agent table (see `docs/compatibility.md`)
 
 ## Step 3 — Diff against catalog
 
-Compare with `skills/*/SKILL.md` in this repo. List installed / missing / outdated. Recommend by profile (`docs/profiles.md`): ask user to pick `minimal`, `power`, `mac-npu`, `windows-native`, `windows-wsl`, or `airgapped` — default to auto-detected OS.
+Compare with `skills/*/SKILL.md` in this repo. List installed / missing / outdated. Recommend a profile (`level × platform`, rules in `docs/profiles.md`): level and platform default to the deterministic detector mapping over `detect-env.sh` output; the `daily`↔`power` step is asked explicitly (step 4), quoting `HAS_MCP` as heuristic evidence — it never sets a default. Offer `airgapped` when the box is offline.
 
 ## Step 4 — Ask (max 5 questions)
 
-1. Profile + agents to configure (project, global, or both)?
+1. Profile: confirm detected level (override allowed) — and explicitly: does this box run MCP servers? (`daily` → `power` if yes; the `HAS_MCP` probe reading is heuristic evidence, your word decides) + confirm detected platform + agents to configure (project, global, or both)?
 2. Which missing modules to install?
 3. Symlink (recommended, easy update) or copy?
-4. Local models? (only on macOS 32GB+ / Linux+GPU — else skip)
+4. Local models? Included at `station`; elsewhere only where the platform row in `docs/profiles.md` recommends them — else skip.
 5. Keys now or later? If now: which keys, target file (`~/.bashrc` AFTER `case $-` guard so non-interactive shells see them, `~/.zshenv`, or `.env`).
 
 ## Step 5 — Install

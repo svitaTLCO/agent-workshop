@@ -10,7 +10,7 @@ Token budget: this file only. Each server below loads only on demonstrated need 
 
 Prefer runtime fetch over prompt paste.
 
-- Docs: Context7 (current SDK/API docs — pairs with agent skills; evals show +accuracy, −63% tokens vs stale prompting).
+- Docs: Context7 (current SDK/API docs — pairs with agent skills).
 - Files: filesystem MCP scoped to needed dirs only.
 - Quality/ops: Sentry (prod errors), SonarQube (security), Aspire/OpenTelemetry (runtime logs/traces for debugging — agent inspects behavior, not just code).
 - Rule: start with zero, add one per need, drop when done. Record the set per project in `AGENTS.md` so `agent-onboard` reproduces it.

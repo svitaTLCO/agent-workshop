@@ -128,18 +128,19 @@ Root `AGENTS.md` is the single source of truth; shims point to it — no duplica
 
 ## Profiles 🎛️
 
-Pick a preset, or let the detector choose based on your machine:
+A profile is **level × platform** — pick a footprint, the detector picks your machine's home:
 
-| Profile | Best For | Includes |
-|---|---|---|
-| 🪶 `minimal` | Any box, lowest footprint | `agent-onboard`, `env-detect`, `context-diet` |
-| ⚡ `power` | Daily dev machine | `shell-rtk`, `mcp-essentials`, `memory-system` |
-| 🖥️ `windows-native` | Pure native Windows dev box (no WSL dependency) | `power` + `env-windows` |
-| 🪟 `windows-wsl` | WSL2 interop setups | `power` + `env-wsl` |
-| 🍏 `mac-npu` | Apple Silicon, 32 GB+ | `power` + `env-macos`, `local-models` |
-| 📡 `airgapped` | Offline / air-gapped boxes | `minimal` + OS env + `local-models` |
+| Level | You get |
+|---|---|
+| 🪶 `micro` | core probes only — CI, containers, ephemeral boxes |
+| 🌱 `lean` | + onboard / refresh loop — older or low-RAM boxes |
+| ⚡ `daily` | + `shell-rtk`, `memory-system` — the workhorse default |
+| 🔌 `power` | + `mcp-essentials` — when you run MCP servers |
+| 🧪 `station` | + `local-models` — NPU/GPU research boxes |
 
-Reference table in [`docs/profiles.md`](docs/profiles.md).
+Platforms (`linux` / `mac` / `windows-native` / `windows-wsl`) add the matching env module; `windows-wsl` loads both Windows skills. Offline? The `airgapped` modifier composes with any level. The detector proposes level and platform deterministically; the `daily`↔`power` step is always an explicit question, because no probe can know MCP usage for certain.
+
+Full spec and mapping rules: [`docs/profiles.md`](docs/profiles.md) (canonical source).
 
 ## Module Catalog 🧰
 

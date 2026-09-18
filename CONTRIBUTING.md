@@ -5,7 +5,7 @@
 3. Frontmatter `description` must say what it does **and when to trigger**.
 4. Keep body < 500 lines (ideal < 60); put docs in `references/`, runnable code in `scripts/`.
 5. Include `Token budget` + `Quality gate` sections; prove the gate with run output.
-6. Run `python3 scripts/validate-skills.py`.
+6. Run `python3 scripts/validate-skills.py`; also `python3 scripts/check-profiles.py` when touching profiles docs, onboard, env skills, or detect-env.sh.
 7. Add a bullet to `docs/compatibility.md` noting the skill ↔ OS/agent constraint if it is OS/agent-specific.
 8. PR with: what machine/workflow it optimizes, verification evidence (`doctor` output / before-after tokens).
 

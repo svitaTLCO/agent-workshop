@@ -18,6 +18,14 @@ A skill's frontmatter (`name` + `description`): the always-loaded text that deci
 **Instruction layer**:
 The skill body: what the agent reads after loading and follows to act.
 
+**Level**:
+A profile's footprint tier in `docs/profiles.md` (`micro`, `lean`, `daily`, `power`, `station`): strict superset chain, ascending context cost.
+_Avoid_: edition
+
+**Profile**:
+A composition of level × platform (+ optional `airgapped` modifier) in `docs/profiles.md`. Advisory recommendation; tooling never enforces it.
+_Avoid_: preset (implies enforcement), flavor
+
 ## Measurement
 
 **Harness**:
