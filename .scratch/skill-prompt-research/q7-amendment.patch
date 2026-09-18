@@ -1,0 +1,37 @@
+--- a/eval/scenarios.yaml
++++ b/eval/scenarios.yaml
+@@ -1,4 +1,5 @@
+ # Scenario suite for skill-trigger evaluation. FROZEN after human approval (map Notes);
++# AMENDMENT 2026-09-17 (pre-baseline; approved via ticket 04 decision Q7): scn-template-p{1,2,3} target/expected 'template' -> 'template-skill' (label-space fix — corpus frontmatter name is 'template-skill'; no Baseline data existed at amendment time, comparability unaffected).
+ # any later edit invalidates comparability and forces a re-baseline.
+ # Schema: flat records; judge-side invocation is owned by harness design (ticket 04).
+ version: 1
+@@ -240,22 +241,22 @@
+     expected: skill-creator
+     note: edge
+   - id: scn-template-p1
+-    target: template
++    target: template-skill
+     kind: positive
+     prompt: "copy the template directory to scaffold a brand-new skill"
+-    expected: template
++    expected: template-skill
+     note: canonical — skeleton-level ask, distinct from full skill-creator flow
+   - id: scn-template-p2
+-    target: template
++    target: template-skill
+     kind: positive
+     prompt: "open the template SKILL.md and show me the required frontmatter lines"
+-    expected: template
++    expected: template-skill
+     note: paraphrase — structure inspection
+   - id: scn-template-p3
+-    target: template
++    target: template-skill
+     kind: positive
+     prompt: "validate-skills rejected my new skill — diff mine against the template"
+-    expected: template
++    expected: template-skill
+     note: edge — conformance diff
+   # ── near-misses (cross-skill collisions, global argmax labels) ──────────────
+   - id: scn-nm1

@@ -1,0 +1,297 @@
+{
+ "ctrl_audit": {
+  "base_vs_shared": true,
+  "shared_vs_final": true
+ },
+ "units": {
+  "pair env-windows<->env-wsl": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 12,
+   "trig_post": 12,
+   "total": 13,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 736,
+   "cost_median_post": 1204,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "pair local-models<->env-macos": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 12,
+   "trig_post": 12,
+   "total": 13,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 736,
+   "cost_median_post": 1204,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "pair context-diet<->mcp-essentials": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 13,
+   "trig_post": 13,
+   "total": 14,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 735.5,
+   "cost_median_post": 1203.5,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "pair memory-system<->context-diet": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 13,
+   "trig_post": 13,
+   "total": 14,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 735.0,
+   "cost_median_post": 1203.0,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "agent-onboard": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 10,
+   "trig_post": 10,
+   "total": 11,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 735,
+   "cost_median_post": 1203,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "env-detect": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 8,
+   "trig_post": 8,
+   "total": 9,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 735,
+   "cost_median_post": 1203,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "env-linux": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 8,
+   "trig_post": 8,
+   "total": 9,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 736,
+   "cost_median_post": 1204,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "quality-gates": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 9,
+   "trig_post": 9,
+   "total": 11,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 736,
+   "cost_median_post": 1204,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "shell-rtk": {
+   "gains": [],
+   "losses": [],
+   "unstable": [],
+   "trig_base": 8,
+   "trig_post": 8,
+   "total": 9,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 736,
+   "cost_median_post": 1204,
+   "cost_reduced": false,
+   "adopt": false
+  },
+  "skill-creator (+template trio)": {
+   "gains": [],
+   "losses": [],
+   "unstable": [
+    "scn-template-p2"
+   ],
+   "trig_base": 8,
+   "trig_post": 8,
+   "total": 12,
+   "verdict": "NEUTRAL",
+   "cost_median_base": 734.5,
+   "cost_median_post": 1202.5,
+   "cost_reduced": false,
+   "adopt": false
+  }
+ },
+ "headline": {
+  "base_overall": 51,
+  "post_overall": 51,
+  "by_kind_base": {
+   "positive": 39,
+   "near-miss": 7,
+   "control": 5
+  },
+  "by_kind_post": {
+   "positive": 39,
+   "near-miss": 7,
+   "control": 5
+  },
+  "kind_totals": {
+   "positive": 42,
+   "near-miss": 8,
+   "control": 6
+  },
+  "cost_median_base": 737.0,
+  "cost_median_post": 1205.0,
+  "cost_max_base": 747,
+  "cost_max_post": 1215,
+  "flips": [],
+  "post_unstable": [
+   "scn-template-p2"
+  ],
+  "template_p2_votes": {
+   "unit_run": [
+    "skill-creator",
+    "skill-creator",
+    "skill-creator",
+    "skill-creator",
+    null
+   ],
+   "final_run": [
+    null,
+    "skill-creator",
+    "skill-creator",
+    "skill-creator",
+    null
+   ]
+  }
+ },
+ "galene_subset": [
+  {
+   "sid": "scn-context-diet-p1",
+   "base": "context-diet",
+   "galene": "context-diet",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-ctl1",
+   "base": "quality-gates",
+   "galene": "quality-gates",
+   "agree": "5/5",
+   "matches_expected": false
+  },
+  {
+   "sid": "scn-env-macos-p1",
+   "base": "env-macos",
+   "galene": "env-macos",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-env-windows-p1",
+   "base": "env-windows",
+   "galene": "env-windows",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-env-wsl-p1",
+   "base": "env-wsl",
+   "galene": "env-wsl",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-local-models-p1",
+   "base": "local-models",
+   "galene": "local-models",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-mcp-essentials-p1",
+   "base": "mcp-essentials",
+   "galene": "mcp-essentials",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-memory-system-p1",
+   "base": "memory-system",
+   "galene": "memory-system",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-nm5",
+   "base": "mcp-essentials",
+   "galene": "mcp-essentials",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-nm7",
+   "base": "quality-gates",
+   "galene": "quality-gates",
+   "agree": "5/5",
+   "matches_expected": false
+  },
+  {
+   "sid": "scn-quality-gates-p1",
+   "base": "quality-gates",
+   "galene": "quality-gates",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-quality-gates-p2",
+   "base": "quality-gates",
+   "galene": "quality-gates",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-quality-gates-p3",
+   "base": "quality-gates",
+   "galene": "quality-gates",
+   "agree": "5/5",
+   "matches_expected": true
+  },
+  {
+   "sid": "scn-template-p1",
+   "base": "skill-creator",
+   "galene": "skill-creator",
+   "agree": "5/5",
+   "matches_expected": false
+  },
+  {
+   "sid": "scn-template-p2",
+   "base": "skill-creator",
+   "galene": "skill-creator",
+   "agree": "5/5",
+   "matches_expected": false
+  },
+  {
+   "sid": "scn-template-p3",
+   "base": "skill-creator",
+   "galene": "skill-creator",
+   "agree": "5/5",
+   "matches_expected": false
+  }
+ ]
+}
